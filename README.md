@@ -1,74 +1,110 @@
-package main
+The program implemented in the Go programming language outputs the bijection between the set of natural numbers N and the set of rational numbers Q up to the threshold specified by the user on standard input. The program is in Italian.
 
-import (
-	. "fmt"
-)
+go run .\Cantor_Numerabilità_Razionale.go
 
-func CreaTabella(n int) [][]float64 { //funzione che crea la tabella di Cantor
-	var tabella [][]float64
-	for i := 1; i < n; i++ {
-		var rigapositiva []float64
-		for j := 0; j < n; j++ {
-			rigapositiva = append(rigapositiva, (float64(j) / float64(i))) //aggiungiamo la riga con i rapporti n/m
-		}
-		var riganegativa []float64
-		for j := 0; j < n; j++ {
-			riganegativa = append(riganegativa, (-float64(j) / float64(i)))
-		}
-		tabella = append(tabella, rigapositiva, riganegativa) //aggiungiamo la riga con i rapporti -n/m
-	}
-	return tabella
-}
+Benvenuto al programma sulla numerabilità dell'insieme dei razionali Q (di GIUGNI GABRIELE, matr. 31394A)
+Inserisci la soglia desiderata: 100
 
-func PercorriTabella(n int, tabella [][]float64) []float64 { //percorriamo la tabella in senso diagonale da sx a dx dal basso verso l'alto
-	var razionali []float64
-	for i := 0; i < n; i++ {
-		for j := 0; j < i+1; j++ {
-			k := 0
-			if i != 0 && j != 0 {
-				n := tabella[i-j-k][j]
-				razionali = append(razionali, n)
-				k++
-			} else if j == 0 {
-				n := tabella[i][j]
-				razionali = append(razionali, n)
-			}
-		}
-
-	}
-	return razionali //resituiamo la tabella con tutti i razionali trovati nel percorso
-}
-
-func CreaLista(razionali []float64) []float64 { //funzione che crea una lista con i razionali presenti una sola volta
-	var unici []float64
-	for i, v := range razionali {
-		if Unici(i, v, razionali) {
-			unici = append(unici, v)
-		}
-	}
-	return unici
-}
-
-func Unici(i int, n float64, razionali []float64) bool { //funzione che controlla se un numero razionale è già stato trovato in precedenza
-	for j := 0; j < i; j++ {
-		if n == razionali[j] {
-			return false
-		}
-	}
-	return true
-}
-
-func StampaOutput(lista []float64, n int) { //funzione che stampa la lista dei numeri naturali con una biezione da N a Q fino alla soglia stabilita
-	for i := 0; i <= n; i++ {
-		Printf("f(%d) = %g;\n", i, lista[i])
-	}
-}
-
-func main() {
-	var n int
-	Print("\nBenvenuto al programma sulla numerabilità dell'insieme dei razionali Q (di GIUGNI GABRIELE, matr. 31394A)\nInserisci la soglia desiderata: ")
-	Scan(&n)
-	Println("\nI numeri razionali numerati attraverso una biezione N -> Q fino alla soglia stabilita sono:")
-	tab := CreaTabella(n)
-	StampaOutput(CreaLista(PercorriTabella(n, tab)), n)
-}
+I numeri razionali numerati attraverso una biezione N -> Q fino alla soglia stabilita sono:
+f(0) = 0;
+f(1) = 1;
+f(2) = -1;
+f(3) = 2;
+f(4) = 0.5;
+f(5) = -2;
+f(6) = 3;
+f(7) = -0.5;
+f(8) = -3;
+f(9) = 4;
+f(10) = 0.3333333333333333;
+f(11) = 1.5;
+f(12) = -4;
+f(13) = 5;
+f(14) = -0.3333333333333333;
+f(15) = 0.6666666666666666;
+f(16) = -1.5;
+f(17) = -5;
+f(18) = 6;
+f(19) = 0.25;
+f(20) = -0.6666666666666666;
+f(21) = 2.5;
+f(22) = -6;
+f(23) = 7;
+f(24) = -0.25;
+f(25) = 1.3333333333333333;
+f(26) = -2.5;
+f(27) = -7;
+f(28) = 8;
+f(29) = 0.2;
+f(30) = 0.75;
+f(31) = -1.3333333333333333;
+f(32) = 1.6666666666666667;
+f(33) = 3.5;
+f(34) = -8;
+f(35) = 9;
+f(36) = -0.2;
+f(37) = 0.4;
+f(38) = -0.75;
+f(39) = -1.6666666666666667;
+f(40) = -3.5;
+f(41) = -9;
+f(42) = 10;
+f(43) = 0.16666666666666666;
+f(44) = -0.4;
+f(45) = 0.6;
+f(46) = 1.25;
+f(47) = 2.3333333333333335;
+f(48) = 4.5;
+f(49) = -10;
+f(50) = 11;
+f(51) = -0.16666666666666666;
+f(52) = -0.6;
+f(53) = 0.8;
+f(54) = -1.25;
+f(55) = -2.3333333333333335;
+f(56) = 2.6666666666666665;
+f(57) = -4.5;
+f(58) = -11;
+f(59) = 12;
+f(60) = 0.14285714285714285;
+f(61) = -0.8;
+f(62) = 1.75;
+f(63) = -2.6666666666666665;
+f(64) = 5.5;
+f(65) = -12;
+f(66) = 13;
+f(67) = -0.14285714285714285;
+f(68) = 0.2857142857142857;
+f(69) = 1.2;
+f(70) = -1.75;
+f(71) = 3.3333333333333335;
+f(72) = -5.5;
+f(73) = -13;
+f(74) = 14;
+f(75) = 0.125;
+f(76) = -0.2857142857142857;
+f(77) = 0.42857142857142855;
+f(78) = 0.8333333333333334;
+f(79) = -1.2;
+f(80) = 1.4;
+f(81) = 2.25;
+f(82) = -3.3333333333333335;
+f(83) = 3.6666666666666665;
+f(84) = 6.5;
+f(85) = -14;
+f(86) = 15;
+f(87) = -0.125;
+f(88) = -0.42857142857142855;
+f(89) = 0.5714285714285714;
+f(90) = -0.8333333333333334;
+f(91) = -1.4;
+f(92) = 1.6;
+f(93) = -2.25;
+f(94) = -3.6666666666666665;
+f(95) = -6.5;
+f(96) = -15;
+f(97) = 16;
+f(98) = 0.1111111111111111;
+f(99) = 0.375;
+f(100) = -0.5714285714285714;
+etc.
